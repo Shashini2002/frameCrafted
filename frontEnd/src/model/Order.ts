@@ -1,7 +1,7 @@
 export class Order{
 
     address :String;
-    comments : String;
+    comment : String;
     emailAddress : String;
     phoneNumber : String;
     photoUrl :String;
@@ -17,7 +17,7 @@ export class Order{
 
 
 constructor(address :String,
-    comments : String,
+    comment : String,
     emailAddress : String,
     phoneNumber : String,
     photoUrl :String,
@@ -32,7 +32,7 @@ this.emailAddress = emailAddress;
 this.address =address;
 this.phoneNumber = phoneNumber;
 this.photoUrl =photoUrl;
-this.comments = comments;
+this.comment = comment;
 this.price=price;
 this.orderState=orderState ;
 

@@ -6,6 +6,7 @@ import { CustomerFeedbackComponent } from './pages/customer-feedback/customer-fe
 import { StandradFrameComponent } from './pages/standrad-frame/standrad-frame.component';
 import { PlaceOrderComponent } from './pages/place-order/place-order.component';
 import { NgModule } from '@angular/core';
+import { WallArtsComponent } from './pages/wall-arts/wall-arts.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -15,6 +16,7 @@ export const routes: Routes = [
   { path: 'customer-feedback', component: CustomerFeedbackComponent },
   { path: 'standrad-frame', component: StandradFrameComponent },
   { path: 'place-order', component: PlaceOrderComponent },
+  { path: 'wall-arts', component: WallArtsComponent },
  
 ];
 
