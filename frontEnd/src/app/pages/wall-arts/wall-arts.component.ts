@@ -4,10 +4,11 @@ import { FooterComponent } from '../footer/footer.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-wall-arts',
-  imports: [NavigationBarComponent,FooterComponent,CommonModule,FormsModule,HttpClientModule],
+  imports: [NavigationBarComponent,FooterComponent,CommonModule,FormsModule,HttpClientModule,RouterLink],
   templateUrl: './wall-arts.component.html',
   styleUrl: './wall-arts.component.css'
 })
