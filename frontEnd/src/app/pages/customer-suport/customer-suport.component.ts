@@ -15,7 +15,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 export class CustomerSuportComponent {
 public customerSupport: CustomerSpport = new CustomerSpport("", "", "", false,"");
 
-constructor(private http: HttpClient,private ngZone: NgZone) {
+constructor(private http: HttpClient) {
 }
 sendMessage() {
   this.customerSupport.solveIt = false;

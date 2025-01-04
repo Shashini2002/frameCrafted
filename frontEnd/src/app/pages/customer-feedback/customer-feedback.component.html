@@ -1,64 +1,38 @@
 <app-navigation-bar></app-navigation-bar>
+
 <h1 style="font-weight: bold; font-size: 30px; margin-left: 36%; margin-top: 40px; color: #3B3A58; margin-bottom: 10px;">"Tell Us What You Think!"</h1>
-<p style="margin-left: 250px;margin-right: 200px;font-size: large;margin-bottom: 20px;">Your insights are invaluable. By sharing your thoughts, you help us innovate and create solutions that truly meet your needs. Let’s work together to make every experience exceptional.</p>
+<p style="margin-left: 250px; margin-right: 200px; font-size: large; margin-bottom: 20px;">Your insights are invaluable. By sharing your thoughts, you help us innovate and create solutions that truly meet your needs. Let’s work together to make every experience exceptional.</p>
 
-<script>
-  function checkImage(img) {
-    img.onerror = null; // Prevent infinite loop
-    img.style.display = "none"; // Hide the image if it fails to load
-  }
-</script>
-
+<!-- Feedback Form -->
 <div class="max-w-sm mx-auto">
   <div class="mb-5">
-    <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your email" required />
+    <input type="email" [(ngModel)]="feedback.emailAddress" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your email" required />
   </div>
 
-  <div class="flex items-center space-x-2">
-    <div class="flex-grow">
-      <textarea id="message" rows="2" class="w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 resize-none" placeholder="Leave a comment..."></textarea>
-    </div>
-    
+  <div class="mb-5">
+    <textarea id="message" [(ngModel)]="feedback.comment" rows="2" class="w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 resize-none" placeholder="Leave a comment..."></textarea>
   </div>
 
-  <button type="submit" class="mt-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" style="text-align: center; background-color: #D8A7B1;color: #9569B2;font-weight: bold;font-size: medium;">Submit</button>
+  <button type="button" (click)="saveFeedback()" class="mt-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" style="text-align: center; background-color: #D8A7B1; color: #9569B2; font-weight: bold; font-size: medium;margin-left: 40%;">Submit</button>
 </div>
 
+<!-- Feedback Cards -->
 <h1 style="font-weight: bold; font-size: 30px; margin-left: 36%; margin-top: 40px; color: #3B3A58; margin-bottom: 10px;">Recommended By Customers</h1>
-<div class="grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-2 bg-white dark:bg-gray-800">
-  <!-- Example Feedback Card -->
-  <figure class="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700">
-    <img 
-      class="w-24 h-24 mb-4" 
-      src="" 
-      alt="Customer picture" 
-      onerror="this.style.display='none';" 
-    />
-    <blockquote class="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
-      <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Great Service!</h3>
-      <p class="my-4">"The customer support team was quick to respond and solved my issue in no time. Highly recommend!"</p>
+<div style="display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin: 0 10%; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+  <figure *ngFor="let fb of feedbackList" style="background-color: #9569b260; border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s, box-shadow 0.3s;">
+    <!-- De-emphasized Title -->
+    <h3 style="font-size: 16px; font-weight: normal; color: #888; margin-bottom: 10px;">Customer Feedback</h3>
+
+    <!-- Focused and Bold Comment -->
+    <blockquote style="margin-bottom: 15px;">
+      <p style="font-size: 18px; font-weight: bold; color: #3B3A58; line-height: 1.5;">"{{ fb.comment }}"</p>
     </blockquote>
-    <figcaption class="space-y-0.5 font-medium dark:text-white text-center">
-      <div>johndoe&#64;gmail.com</div>
-    </figcaption>    
+
+    <!-- Subtle Email Address -->
+    <figcaption style="font-size: 14px; color: #888; font-style: italic;">{{ fb.emailAddress }}</figcaption>
   </figure>
-  <!-- Add more feedback cards as needed -->
-  <figure class="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 md:rounded-se-lg dark:bg-gray-800 dark:border-gray-700">
-    <img 
-      class="w-24 h-24 mb-4" 
-      src="../assets/images/C1xwu0Bn+CS._UX250_.jpg" 
-      alt="Customer picture" 
-      onerror="this.style.display='none';"
-    />
-    <blockquote class="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
-      <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Exceptional Quality!</h3>
-      <p class="my-4">"The products were exactly as described. I'll definitely shop again!"</p>
-    </blockquote>
-    <figcaption class="space-y-0.5 font-medium dark:text-white text-center">
-      <div>janesmithe&#64;gmail.com</div>
-    </figcaption>    
-  </figure>
-  
 </div>
+
+
 
 <app-footer></app-footer>

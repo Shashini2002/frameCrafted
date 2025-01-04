@@ -23,7 +23,7 @@ public class OrderEntity {
         @Column(nullable = true)
         private String comment;
 
-        @Column(nullable = false, unique = true)
+        @Column(nullable = false)
         private String emailAddress;
 
         @Column(nullable = false, length = 15)
