@@ -31,14 +31,21 @@ public class OrderController {
     }
 
     @PostMapping("/place-order")
-    public ResponseEntity<String> addOrder(@RequestBody Order order) {
+    public ResponseEntity<Map<String, Object>> addOrder(@RequestBody Order order) {
+        Map<String, Object> response = new HashMap<>();
         try {
             service.addOrder(order);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Order created successfully");
+            response.put("status", "success");
+            response.put("message", "Order created successfully");
+            response.put("order", order);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            response.put("status", "error");
+            response.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
+
     @PostMapping("/track")
     public ResponseEntity<?> trackOrder(@RequestBody Map<String, String> request) {
         String orderId = request.get("orderId");
@@ -59,11 +66,11 @@ public class OrderController {
 
             // Map the status code to a readable status message
             String statusMessage = switch (entity.getOrderState()) {
-                case "1" -> "Non-Pay";
-                case "2" -> "Pending";
-                case "3" -> "Processing";
-                case "4"-> "Delivering";
-                case "5" -> "Delivered";
+
+                case "1" -> "Pending";
+                case "2" -> "Processing";
+                case "3"-> "Delivering";
+                case "4" -> "Delivered";
                 default -> "Unknown Status";
             };
             response.put("status", statusMessage);

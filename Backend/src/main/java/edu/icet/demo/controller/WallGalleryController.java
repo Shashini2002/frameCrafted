@@ -1,9 +1,10 @@
 package edu.icet.demo.controller;
 
-import edu.icet.demo.dto.Order;
+
 import edu.icet.demo.dto.StandardWithGlassFrame;
-import edu.icet.demo.repository.StandardWithGlassFrameRepository;
-import edu.icet.demo.service.StandardWithGlassFrameService;
+import edu.icet.demo.dto.WallGallery;
+import edu.icet.demo.repository.WallGalleryRepository;
+import edu.icet.demo.service.WallGalleryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,27 +13,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
-@RequiredArgsConstructor
-@RequestMapping("/standard-with-glass-frame")
-public class StandardWithGlassFrameController {
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", exposedHeaders = "Content-Type")
 
-    private final StandardWithGlassFrameService service;
-    private final StandardWithGlassFrameRepository repository;
+@RequiredArgsConstructor
+@RequestMapping("/wall-gallery")
+public class WallGalleryController {
+    private final WallGalleryService service;
+    private final WallGalleryRepository repository;
 
     @GetMapping("/get-all-item")
-    public ResponseEntity<List<StandardWithGlassFrame>> getAll() {
-        List<StandardWithGlassFrame> standardWithGlassFrames = service.getAllItem();
-        if (standardWithGlassFrames.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(standardWithGlassFrames);
+    public ResponseEntity<List<WallGallery>> getAll() {
+        List<WallGallery> wallGalleries = service.getAllItem();
+        if (wallGalleries.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(wallGalleries);
         }
-        return ResponseEntity.ok(standardWithGlassFrames);
+        return ResponseEntity.ok(wallGalleries);
     }
 
     @PostMapping("/add-item")
-    public ResponseEntity<String> addItem(@RequestBody StandardWithGlassFrame standardWithGlassFrame) {
+    public ResponseEntity<String> addItem(@RequestBody WallGallery wallGallery) {
         try {
-            service.addItem(standardWithGlassFrame);
+            service.addItem(wallGallery);
             return ResponseEntity.status(HttpStatus.CREATED).body("item add successful");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -50,13 +51,12 @@ public class StandardWithGlassFrameController {
     }
 
     @PutMapping("/update-item")
-    public ResponseEntity<String> updateItem(@RequestBody StandardWithGlassFrame standardWithGlassFrame) {
+    public ResponseEntity<String> updateItem(@RequestBody WallGallery wallGallery) {
         try {
-            service.updateItem(standardWithGlassFrame);
+            service.updateItem(wallGallery);
             return ResponseEntity.ok("Item updated successfully");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
 }

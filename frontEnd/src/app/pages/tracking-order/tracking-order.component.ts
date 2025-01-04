@@ -18,7 +18,7 @@ export class TrackingOrderComponent {
   showModal: boolean = false;
   showUpdateModal: boolean = false;
   orderDetails: any = { itemCode: '', price: '', status: '', emailAddress: '', phoneNumber: '', address: '', photoUrl: '', comments: '' };
-  statuses: string[] = ['Non-Pay', 'Pending', 'Processing', 'Delivering', 'Delivered'];
+  statuses: string[] = [ 'Pending', 'Processing', 'Delivering', 'Delivered'];
   currentStatusIndex: number = 0;
 
   constructor(private http: HttpClient) {}
@@ -52,7 +52,7 @@ export class TrackingOrderComponent {
   }
 
   openUpdateModal() {
-    if (this.currentStatusIndex >= 4) {
+    if (this.currentStatusIndex >= 2) {
       alert('Orders in Delivering or Delivered status cannot be updated.');
       return;
     }
@@ -97,7 +97,7 @@ export class TrackingOrderComponent {
   }
 
   cancelOrder() {
-    if (this.currentStatusIndex >= 4) {
+    if (this.currentStatusIndex >= 2) {
       alert('Orders in Delivering or Delivered status cannot be cancelled.');
       return;
     }

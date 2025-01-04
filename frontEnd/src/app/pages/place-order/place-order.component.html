@@ -1,4 +1,4 @@
-<app-navigation-bar></app-navigation-bar>
+
 
 <!-- Back Arrow -->
 <div style="margin: 20px;">
@@ -50,11 +50,12 @@
         <div style="display: flex; gap: 15%;">
         <div>
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Email</label>
-            <input [(ngModel)]="order.emailAddress" name="email" type="email" style="background: #ffffff; border: 1px solid #C8A5C1; border-radius: 8px; padding: 10px; font-size: 14px; color: #3B3A58; width: 135%;" placeholder="Enter email" required=""/>
+            <input [(ngModel)]="order.emailAddress" name="email" type="email" style="background: #ffffff; border: 1px solid #C8A5C1; border-radius: 8px; padding: 10px; font-size: 14px; color: #3B3A58; width: 135%;" placeholder="Enter email" required />
+           
         </div>
         <div>
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Phone Number</label>
-            <input [(ngModel)]="order.phoneNumber" type="text" style="background: #ffffff; border: 1px solid #C8A5C1; border-radius: 8px; padding: 10px; font-size: 14px; color: #3B3A58; width: 140%;" placeholder="Enter phone number" required=""/>
+            <input [(ngModel)]="order.phoneNumber" type="text" style="background: #ffffff; border: 1px solid #C8A5C1; border-radius: 8px; padding: 10px; font-size: 14px; color: #3B3A58; width: 140%;" placeholder="Enter phone number" required/>
         </div>
         </div>
         
@@ -64,7 +65,7 @@
        
         <div>
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Address</label>
-            <textarea rows="3" [(ngModel)]="order.address" type="text" style="background: #ffffff; border: 1px solid #C8A5C1; border-radius: 8px; padding: 10px; font-size: 14px; color: #3B3A58; width: 100%;" placeholder="Enter address" required=""></textarea>
+            <textarea rows="3" [(ngModel)]="order.address" type="text" style="background: #ffffff; border: 1px solid #C8A5C1; border-radius: 8px; padding: 10px; font-size: 14px; color: #3B3A58; width: 100%;" placeholder="Enter address" required></textarea>
         </div>
         
         <div></div>
@@ -72,7 +73,7 @@
 
         <div>
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Phone Number</label>
-            <input [(ngModel)]="order.phoneNumber" type="text" style="background: #ffffff; border: 1px solid #C8A5C1; border-radius: 8px; padding: 10px; font-size: 14px; color: #3B3A58; width: 100%;" placeholder="Enter phone number" required=""/>
+            <input [(ngModel)]="order.phoneNumber" type="text" style="background: #ffffff; border: 1px solid #C8A5C1; border-radius: 8px; padding: 10px; font-size: 14px; color: #3B3A58; width: 100%;" placeholder="Enter phone number" required/>
         </div>
        
         <div></div>
@@ -80,20 +81,45 @@
         <div>
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Photo url</label>
             <p>(uploade your photo to google drive and upload link)</p>
-            <input [(ngModel)]="order.photoUrl" name="email" type="url" style="background: #ffffff; border: 1px solid #C8A5C1; border-radius: 8px; padding: 10px; font-size: 14px; color: #3B3A58; width: 100%;" placeholder="Enter image url" required=""/>
+            <input [(ngModel)]="order.photoUrl" name="email" type="url" style="background: #ffffff; border: 1px solid #C8A5C1; border-radius: 8px; padding: 10px; font-size: 14px; color: #3B3A58; width: 100%;" placeholder="Enter image url" required/>
         </div>
         <div></div>
         <div>
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Comments</label>
-            <textarea [(ngModel)]="order.comments" rows="3" style="background: #ffffff; border: 1px solid #C8A5C1; border-radius: 8px; padding: 10px; font-size: 14px; color: #3B3A58; width: 100%;" placeholder="Enter any additional comments"></textarea>
+            <textarea [(ngModel)]="order.comment" rows="3" style="background: #ffffff; border: 1px solid #C8A5C1; border-radius: 8px; padding: 10px; font-size: 14px; color: #3B3A58; width: 100%;" placeholder="Enter any additional comments"></textarea>
         </div>
     </div>
 
     <!-- Submit Button -->
-    <button (click)="placeOrder()" type="button" style="background-color: #d8a7b173; border-radius: 50px; color: #9569B2; font-weight: bold; padding: 10px 20px; border: none; border-radius: 8px; margin-top: 16px; cursor: pointer; transition: background-color 0.3s ease;">
+    <button (click)="openPaymentModal()"type="button" style="background-color: #d8a7b173; border-radius: 50px; color: #9569B2; font-weight: bold; padding: 10px 20px; border: none; border-radius: 8px; margin-top: 16px; cursor: pointer; transition: background-color 0.3s ease;">
         Place Order
     </button>
 </div>
+<!-- Payment Modal -->
+<div id="paymentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div style="background: #fff; padding: 20px; border-radius: 12px; width: 400px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+      <button type="button" style="background: none; border: none; color: #9569B2; margin-top: 10px; cursor: pointer; display: block; text-align: center;margin-left: 90%;" (click)="closePaymentModal()">
+        X
+      </button>
+      <h3 style="margin: 0 0 20px 0; text-align: center; color: #3B3A58;">Card Payment</h3>
+      <div>
+        <label style="display: block; margin-bottom: 8px; font-weight: bold;">Card Number</label>
+        <input id="cardNumber" type="text" style="width: 100%; padding: 10px; margin-bottom: 16px; border-radius: 8px; border: 1px solid #C8A5C1;" placeholder="Enter card number">
+  
+        <label style="display: block; margin-bottom: 8px; font-weight: bold;">Expiry Date</label>
+        <input id="expiryDate" type="month" style="width: 100%; padding: 10px; margin-bottom: 16px; border-radius: 8px; border: 1px solid #C8A5C1;">
+  
+        <label style="display: block; margin-bottom: 8px; font-weight: bold;">CVV</label>
+        <input id="cvv" type="text" style="width: 100%; padding: 10px; margin-bottom: 16px; border-radius: 8px; border: 1px solid #C8A5C1;" placeholder="Enter CVV">
+  
+        <button type="button" style="background-color: #d8a7b173; border-radius: 50px; color: #9569B2; font-weight: bold; padding: 10px 20px; border: none; cursor: pointer; transition: background-color 0.3s ease;" (click)="placeOrder()">
+          Submit Payment
+        </button>
+      </div>
+    </div>
+  </div>
+  
 
 
-<app-footer></app-footer>
+
+
