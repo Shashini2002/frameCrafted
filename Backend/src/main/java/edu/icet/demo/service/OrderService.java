@@ -12,7 +12,7 @@ public interface OrderService {
 
 
     List<Order> getAllOrder();
-    void addOrder(Order order);
+    OrderEntity addOrder(Order order);
 
     void updateOrder(Order order);
 }

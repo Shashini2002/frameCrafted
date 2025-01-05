@@ -34,19 +34,24 @@ public class OrderServiceImpl implements OrderService {
                 .collect(Collectors.toList());
     }
 
-    @Override
 
-    public void addOrder(Order order) {
+
+    @Override
+    public OrderEntity addOrder(Order order) {
         System.out.println("Incoming Order DTO: " + order);
         try {
+            // Map Order DTO to OrderEntity
             OrderEntity entity = mapper.map(order, OrderEntity.class);
             System.out.println("Mapped Entity: " + entity);
-            repository.save(entity);
+
+            // Save the entity and return the saved entity
+            return repository.save(entity);
         } catch (Exception e) {
             System.err.println("Mapping or Saving Failed: " + e.getMessage());
-            throw e;
+            throw new IllegalArgumentException("Failed to place order: " + e.getMessage(), e);
         }
     }
+
 
 
     @Override

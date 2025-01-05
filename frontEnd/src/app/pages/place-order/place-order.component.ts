@@ -29,37 +29,40 @@ export class PlaceOrderComponent {
   }
 
   placeOrder() {
-
-
-  // Payment Modal Validation
-  const cardNumber = (<HTMLInputElement>document.getElementById("cardNumber")).value;
-  const expiryDate = (<HTMLInputElement>document.getElementById("expiryDate")).value;
-  const cvv = (<HTMLInputElement>document.getElementById("cvv")).value;
-
-  if (!cardNumber || !expiryDate || !cvv) {
-    alert("Please fill in all the payment details (Card Number, Expiry Date, CVV).");
-    return; // Exit the method if payment validation fails
-  }
-
-
-
-
-
+    // Payment Modal Validation
+    const cardNumber = (<HTMLInputElement>document.getElementById("cardNumber")).value;
+    const expiryDate = (<HTMLInputElement>document.getElementById("expiryDate")).value;
+    const cvv = (<HTMLInputElement>document.getElementById("cvv")).value;
+  
+    if (!cardNumber || !expiryDate || !cvv) {
+      alert("Please fill in all the payment details (Card Number, Expiry Date, CVV).");
+      return; // Exit the method if payment validation fails
+    }
+  
+    // Send the order data to the backend
     this.http.post("http://localhost:8080/order/place-order", this.order).subscribe({
-        next: (res) => {
-            console.log("Success:", res);
-           
-        },
-        error: (err) => {
-            console.error("Error:", err);
-            alert("Failed to place order.");
-        }
+      next: (res: any) => {
+        console.log("Success:", res);
+        alert(`Order placed successfully! Your Order ID is: ${res.orderId} (You can tarck your order with this order Id..so keep it)`);
+        this.displayOrderId(res.orderId); // Call a method to display the Order ID
+        this.closePaymentModal();
+        this.resetForm();
+      },
+      error: (err) => {
+        console.error("Error:", err);
+        alert("Failed to place order.");
+      }
     });
-    alert("Order placed successfully!");
-    this.closePaymentModal(); // Close the modal
-this.resetForm();
-}
-
+  }
+  
+  displayOrderId(orderId: string) {
+    const orderIdElement = document.getElementById("orderIdDisplay");
+    if (orderIdElement) {
+      orderIdElement.innerText = `Order ID: ${orderId}`;
+      orderIdElement.style.display = "block"; // Make sure the element is visible
+    }
+  }
+  
   
   showModal: boolean = false;
   openPaymentModal() {

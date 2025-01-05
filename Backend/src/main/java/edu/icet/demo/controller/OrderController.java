@@ -34,10 +34,14 @@ public class OrderController {
     public ResponseEntity<Map<String, Object>> addOrder(@RequestBody Order order) {
         Map<String, Object> response = new HashMap<>();
         try {
-            service.addOrder(order);
+            // Call the service to add the order and get the saved entity
+            OrderEntity savedOrder = service.addOrder(order);
+
             response.put("status", "success");
             response.put("message", "Order created successfully");
+            response.put("orderId", savedOrder.getId()); // Include the saved order ID
             response.put("order", order);
+
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (IllegalArgumentException e) {
             response.put("status", "error");
@@ -45,6 +49,7 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
+
 
     @PostMapping("/track")
     public ResponseEntity<?> trackOrder(@RequestBody Map<String, String> request) {
