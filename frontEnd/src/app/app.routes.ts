@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { WallArtsComponent } from './pages/wall-arts/wall-arts.component';
 import { DigitalOilPaintingComponent } from './pages/digital-oil-painting/digital-oil-painting.component';
 import { CustomizedPhotoFrameComponent } from './pages/customized-photo-frame/customized-photo-frame.component';
+import { BeadingFrameComponent } from './pages/beading-frame/beading-frame.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'wall-arts', component: WallArtsComponent },
   { path: 'oil-painting', component: DigitalOilPaintingComponent },
   { path: 'custormized-frame', component: CustomizedPhotoFrameComponent },
+  { path: 'beading-frame', component: BeadingFrameComponent },
  
 ];
 
