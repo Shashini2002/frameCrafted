@@ -16,4 +16,5 @@ public class WallGallery {
     private String size;
     private String price;
     private byte[] image;
+    private Integer categoryId;
 }

@@ -7,6 +7,8 @@ import { StandradFrameComponent } from './pages/standrad-frame/standrad-frame.co
 import { PlaceOrderComponent } from './pages/place-order/place-order.component';
 import { NgModule } from '@angular/core';
 import { WallArtsComponent } from './pages/wall-arts/wall-arts.component';
+import { DigitalOilPaintingComponent } from './pages/digital-oil-painting/digital-oil-painting.component';
+import { CustomizedPhotoFrameComponent } from './pages/customized-photo-frame/customized-photo-frame.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -17,6 +19,8 @@ export const routes: Routes = [
   { path: 'standrad-frame', component: StandradFrameComponent },
   { path: 'place-order', component: PlaceOrderComponent },
   { path: 'wall-arts', component: WallArtsComponent },
+  { path: 'oil-painting', component: DigitalOilPaintingComponent },
+  { path: 'custormized-frame', component: CustomizedPhotoFrameComponent },
  
 ];
 

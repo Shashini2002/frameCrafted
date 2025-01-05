@@ -1,7 +1,7 @@
 <app-navigation-bar></app-navigation-bar>
 <h1 style="font-weight: bold; font-size: 30px; margin-left: 45%; margin-top: 40px; color: #3B3A58; margin-bottom: 10px;">Wall Gallery</h1>
 
-<div class="grid grid-cols-2 md:grid-cols-3 gap-4" style="margin-bottom: 20px;">
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4" style="margin-bottom: 20px; margin-top: 40px;">
   <div *ngFor="let item of wallGalleryItems" class="text-center">
     <img class="h-auto max-w-full rounded-lg" [src]="item.imageUrl" alt="Image" style="width: 400px; margin-left: 10%;margin-right: 60px;" />
     <p style="font-weight: bold;">{{ item.itemName }}</p>

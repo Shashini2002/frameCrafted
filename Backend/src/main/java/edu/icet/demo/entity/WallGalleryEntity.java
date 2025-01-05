@@ -33,4 +33,6 @@ public class WallGalleryEntity {
 
     private byte[] image;
 
+    @Column(nullable = false)
+    private Integer categoryId;
 }

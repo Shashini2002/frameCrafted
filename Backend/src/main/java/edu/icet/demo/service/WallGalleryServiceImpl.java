@@ -62,6 +62,19 @@ public class WallGalleryServiceImpl implements WallGalleryService{
     }
 
     @Override
+    public List<WallGallery> getItemsByCategoryId(Integer categoryId) {
+        try {
+            return repository.findByCategoryId(categoryId).stream()
+                    .map(entity -> mapper.map(entity, WallGallery.class))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            System.err.println("Failed to fetch items by categoryId: " + e.getMessage());
+            throw new RuntimeException("Failed to fetch items", e);
+        }
+    }
+
+
+    @Override
     public void updateItem(WallGallery wallGallery) {
         if (wallGallery.getId() == null || !repository.existsById(wallGallery.getId())) {
             throw new IllegalArgumentException("Order with ID " + wallGallery.getId() + " does not exist.");

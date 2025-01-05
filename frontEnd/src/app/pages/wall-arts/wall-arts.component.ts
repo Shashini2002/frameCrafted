@@ -22,7 +22,7 @@ export class WallArtsComponent implements OnInit {
   }
 
   fetchWallGalleryItems() {
-    this.http.get<any[]>('http://localhost:8080/wall-gallery/get-all-item')
+    this.http.get<any[]>('http://localhost:8080/wall-gallery/get-by-category/1')
       .subscribe(
         (data) => {
           this.wallGalleryItems = data;

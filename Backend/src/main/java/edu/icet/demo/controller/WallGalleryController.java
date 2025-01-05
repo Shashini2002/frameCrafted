@@ -59,4 +59,13 @@ public class WallGalleryController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+    @GetMapping("/get-by-category/{categoryId}")
+    public ResponseEntity<List<WallGallery>> getItemsByCategory(@PathVariable Integer categoryId) {
+        List<WallGallery> wallGalleries = service.getItemsByCategoryId(categoryId);
+        if (wallGalleries.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(wallGalleries);
+        }
+        return ResponseEntity.ok(wallGalleries);
+    }
+
 }

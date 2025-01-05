@@ -17,4 +17,6 @@ public interface WallGalleryService {
 
     void updateItem(WallGallery wallGallery);
 
+    List<WallGallery> getItemsByCategoryId(Integer categoryId);
+
 }
